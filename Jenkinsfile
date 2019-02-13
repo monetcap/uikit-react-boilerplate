@@ -15,7 +15,7 @@ pipeline {
         stage('Notify Slack') {
           steps {
             script {
-              slackResponse = slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
+              def slackResponse = slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
               sh "echo ${slackResponse.threadId}"
             }
           }
