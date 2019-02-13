@@ -5,7 +5,11 @@ pipeline {
         }
     }
     environment {
-        CI = 'true'
+        COMMIT_MESSAGE = """${sh(
+          returnStdout: true,
+          script: "git --no-pager log --format="medium" -1 ${GIT_COMMIT}"
+          )}
+        """
     }
     stages {
         stage('Install Dependencies') {
@@ -21,7 +25,7 @@ pipeline {
         stage('Build Staging') {
             when { branch 'development' }
             steps {
-                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})\n${GIT_COMMIT}")
+                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})\n${env.COMMIT_MESSAGE}")
                 sh 'npm run build:dev'
             }
         }
