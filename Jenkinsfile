@@ -14,13 +14,7 @@ pipeline {
     stages {
         stage('Notify Slack') {
           steps {
-            slackSend (color: '#FFFF00', message: """
-              Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n
-              (${env.BUILD_URL})\n
-              ```
-              ${env.COMMIT_MESSAGE}
-              ```
-            """)
+            slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})\n```${env.COMMIT_MESSAGE}```")
           }
         }
         stage('Install Dependencies') {
