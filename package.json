@@ -4,9 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:storybook": "start-storybook -p 9001 -c .storybook",
-    "build:storybook": "build-storybook -c .storybook -o ./dist/storybook",
-    "heroku-postbuild": "npm run build",
     "start": "node server.js",
     "start:dev": "webpack-dev-server --open --config webpack.dev.js --progress",
     "build": "webpack -p --config webpack.prod.js --progress",
@@ -18,8 +15,6 @@
   "license": "MIT",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@storybook/addon-viewport": "^4.1.11",
-    "@storybook/react": "^4.1.11",
     "axios": "^0.18.0",
     "clean-webpack-plugin": "^0.1.19",
     "express": "^4.16.4",
