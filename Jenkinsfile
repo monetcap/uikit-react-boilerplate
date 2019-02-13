@@ -12,6 +12,17 @@ pipeline {
         """
     }
     stages {
+        stage('Notify Slack') {
+          steps {
+            slackSend (color: '#FFFF00', message: """
+              Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n
+              (${env.BUILD_URL})\n
+              ```
+              ${env.COMMIT_MESSAGE}
+              ```
+            """)
+          }
+        }
         stage('Install Dependencies') {
             steps {
               sh 'npm install'
@@ -25,14 +36,12 @@ pipeline {
         stage('Build Staging') {
             when { branch 'development' }
             steps {
-                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})\n${env.COMMIT_MESSAGE}")
                 sh 'npm run build:dev'
             }
         }
         stage('Build Production') {
             when { branch 'master' }
             steps {
-                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})")
                 sh 'npm run build'
             }
         }
