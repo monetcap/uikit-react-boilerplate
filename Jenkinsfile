@@ -7,7 +7,7 @@ pipeline {
     environment {
         COMMIT_MESSAGE = """${sh(
           returnStdout: true,
-          script: "git --no-pager log --format="medium" -1 ${GIT_COMMIT}"
+          script: "git --no-pager log --format='medium' -1 ${GIT_COMMIT}"
           )}
         """
     }
