@@ -21,7 +21,7 @@ pipeline {
         stage('Build Staging') {
             when { branch 'development' }
             steps {
-                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})")
+                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})\n${GIT_COMMIT}")
                 sh 'npm run build:dev'
             }
         }
@@ -44,7 +44,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} runner@ragnarok.monetcap.com "rm -rf /docker/staging-frontend.monetcap.com/dist"'
                     sh 'scp -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} -r ./dist "runner@ragnarok.monetcap.com:/docker/staging-frontend.monetcap.com/dist"'
 
-                    slackSend (color: '#7851a9', message: "Deployed: staging-frontend.monetcap.com | staging-frontend.monetcap.com/storybook")
+                    slackSend (color: '#7851a9', message: "Deployed: staging-frontend.monetcap.com")
                 }
             }
         }
