@@ -1,0 +1,13 @@
+// _fonts.scss
+// Define any typographic styles that are not part of a variable or mixin here.
+
+figcaption {
+  color: $monet-white;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  padding: 1em 0em;
+  text-transform: uppercase;
+  width: 70%;
+}

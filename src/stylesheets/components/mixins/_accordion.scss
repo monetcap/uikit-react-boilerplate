@@ -7,17 +7,21 @@
 
 	overflow: hidden;
 
-	//TODO: Return to deal with svg color fill for material icons.
+	// I used masks to apply the color to the SVGs.
 	&::before {
-			content: "";
-			width: ($accordion-title-line-height * 1em);
-			height: ($accordion-title-line-height * 1em);
-			float: right;
-			@include svg-fill($internal-accordion-close-image, "#000", $accordion-icon-color);
-			background-repeat: no-repeat;
-			background-position: 50% 50%;
+		content: "";
+		width: ($accordion-title-line-height * 1em);
+		height: ($accordion-title-line-height * 1em);
+		float: right;
+		background-color: $global-primary-background;
+    -webkit-mask-image: url($internal-accordion-close-image);
+    mask-image: url($internal-accordion-close-image);
+		-webkit-mask-position: center;
+		mask-position: center;
 	}
 
-	.uk-open > &::before { @include svg-fill($internal-accordion-open-image, "#000", $accordion-icon-color);
+	.uk-open > &::before {
+		-webkit-mask-image: url($internal-accordion-open-image);
+		mask-image: url($internal-accordion-open-image);
 	}
 }

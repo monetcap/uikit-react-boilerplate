@@ -1,0 +1,9 @@
+@mixin hook-slider() {
+  &.slider-carousel {
+    font-size: 1.25em;
+    text-transform: uppercase;
+  }
+
+  color: $global-primary-background;
+
+};

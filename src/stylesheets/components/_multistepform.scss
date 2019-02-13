@@ -1,0 +1,6 @@
+// Responsive Mobile Collapse
+.multistepform {
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}

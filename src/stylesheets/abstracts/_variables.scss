@@ -24,11 +24,30 @@ $monet-alt-colors: (
   white: $monet-white
 );
 
+// TODO: move to persay an 'iterators' file in base/abstracts
+@each $color, $value in $monet-colors {
+  // text colors
+  .monet-text-#{$color} {
+    color: $value;
+  }
+}
+
+.background-test {
+  background: $monet-dark-grey;
+}
 // Overriding global UIKit variables.
 $global-primary-background: $monet-teal;
+$global-secondary-background: $monet-pale-grey;
 $global-font-family: "Montserrat", Arial, sans-serif !default;
 // Overriden to restore full opacity.
 $inverse-global-color: $monet-white;
 
 // Overriding base UIKit variables.
 $base-heading-font-weight: 700;
+
+// Navbar color
+$navbar-background: $inverse-global-color;
+
+// Overriding offcanvas bar defaults.
+$offcanvas-bar-color-mode: none;
+$offcanvas-bar-width: 340px;

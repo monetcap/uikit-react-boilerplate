@@ -1,0 +1,29 @@
+// Button component overrides.
+
+// Override button styles.
+@mixin hook-button() {
+  .uk-button {
+    text-transform: none;
+  }
+  
+  .apply-now-trigger & {
+    border-top-right-radius: .25em;
+    border-bottom-right-radius: .25em;
+  }
+
+  &.uk-button-alternate {
+    background: $monet-gold;
+    border-radius: .25em;
+    color: black;
+    font-weight: 500;
+    line-height: 3em;
+  }
+}
+
+// TOOD: Move this.
+.apply-now-trigger {
+  .uk-select {
+    border-top-left-radius: .25em;
+    border-bottom-left-radius: .25em;
+  }
+}

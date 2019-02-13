@@ -1,32 +1,13 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const WebappWebpackPlugin = require('webapp-webpack-plugin');
 
 module.exports = {
   resolve: {
     alias: {
-      Components: path.resolve(__dirname, './src/components/'),
-      Stylesheets: path.resolve(__dirname, './src/stylesheets/'),
-      Images: path.resolve(__dirname, './src/images/'),
-      Templates: path.resolve(__dirname, './src/templates/'),
+      Components: path.resolve(__dirname, '../src/components/'),
+      Stylesheets: path.resolve(__dirname, '../src/stylesheets/'),
+      Images: path.resolve(__dirname, '../src/images/'),
+      Templates: path.resolve(__dirname, '../src/templates/'),
     },
-  },
-  entry: {
-    app: './src/index.js',
-  },
-  plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      title: 'MonetCap | Common Configuration',
-      template: './src/index.html',
-    }), // ,
-    // new WebappWebpackPlugin('./src/images/add-logo-file.png')
-  ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
   },
   module: {
     rules: [

@@ -1,0 +1,22 @@
+// Footer element styles.
+.footer-detail {
+  li {
+    list-style-type: none;
+    margin-bottom: 1em;
+
+    @media (min-width: $breakpoint-small) {
+      display: inline;
+    }
+  }
+
+  li + li::before {
+    @media (min-width: $breakpoint-small) {
+      content: " | ";
+      margin: 0 1em;
+    }
+  }
+}
+
+.footer-disclaimer {
+  font-size: .75em;
+}

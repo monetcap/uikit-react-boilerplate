@@ -1,0 +1,22 @@
+@mixin hook-nav-primary {
+  background: $global-primary-background;
+  height: 100%;
+
+  li {
+    background: $monet-gold;
+    border: 1px $global-secondary-background solid;
+    padding: .5em 1.25em;
+
+    a {
+      color: $global-primary-background;
+      font-weight: 700;
+      font-size: .75em;
+    }
+  }
+}
+
+@mixin hook-navbar {
+  .material-icons {
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,35 @@
+@mixin hook-tab-item-active {
+  background-color: $monet-teal;
+}
+
+/*!
+* On devices > 640px, width of the form steps is 100%.
+* On devices <= 640px, the width of the forms steps is set to auto
+**/
+@mixin hook-tab {
+
+  > li {
+    flex: auto;
+    width: 100%;
+
+    @media(max-width: 640px) {
+      width: auto;
+    }
+  }
+}
+
+// Center Tab Items
+@mixin hook-tab-item {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+// Responsive Mobile Collapse
+@mixin hook-tab-left {
+  flex-direction: column;
+
+  @media(max-width: 640px) {
+    flex-direction: row;
+  }
+}
