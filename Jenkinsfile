@@ -1,5 +1,3 @@
-def slackResponse = 'default';
-
 pipeline {
     agent {
         docker {
@@ -18,6 +16,7 @@ pipeline {
           steps {
             script {
               slackResponse = slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
+              sh "echo ${slackResponse.threadId}"
             }
           }
         }
@@ -55,7 +54,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} runner@ragnarok.monetcap.com "rm -rf /docker/staging-frontend.monetcap.com/dist"'
                     sh 'scp -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} -r ./dist "runner@ragnarok.monetcap.com:/docker/staging-frontend.monetcap.com/dist"'
 
-                    slackSend (channel: "${slackResponse.threadId}", color: '#7851a9', message: "Deployed: staging-frontend.monetcap.com")
+                    slackSend (color: '#7851a9', message: "Deployed: staging-frontend.monetcap.com")
                 }
             }
         }
