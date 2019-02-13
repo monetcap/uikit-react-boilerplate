@@ -15,7 +15,7 @@ pipeline {
         stage('Notify Slack') {
           steps {
             script {
-              SLACK_RESPONSE = slackSend (color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
+              env.CHANNEL_ID = slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```").threadId
             }
           }
         }
@@ -53,7 +53,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} runner@ragnarok.monetcap.com "rm -rf /docker/staging-frontend.monetcap.com/dist"'
                     sh 'scp -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} -r ./dist "runner@ragnarok.monetcap.com:/docker/staging-frontend.monetcap.com/dist"'
 
-                    slackSend (channel: SLACK_RESPONSE.threadId, color: '#7851a9', message: "Deployed: staging-frontend.monetcap.com")
+                    slackSend (channel: "${env.CHANNEL_ID}", color: '#7851a9', message: "Deployed: staging-frontend.monetcap.com")
                 }
             }
         }
