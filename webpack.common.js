@@ -1,7 +1,6 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ZipPlugin = require('zip-webpack-plugin');
 
 // const WebappWebpackPlugin = require('webapp-webpack-plugin');
 
@@ -23,7 +22,6 @@ module.exports = {
       title: 'MonetCap | Common Configuration',
       template: './src/index.html',
     }),
-    new ZipPlugin({ filename: 'build-artifact.zip' }),
     // new WebappWebpackPlugin('./src/images/add-logo-file.png')
   ],
   output: {
