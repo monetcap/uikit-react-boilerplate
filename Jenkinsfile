@@ -14,10 +14,7 @@ pipeline {
     stages {
         stage('Notify Slack') {
           steps {
-            script {
-              def slackResponse = slackSend(channel: '#jenkins-ci', color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
-              sh "echo ${slackResponse.threadId}"
-            }
+            slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
           }
         }
         stage('Install Dependencies') {
