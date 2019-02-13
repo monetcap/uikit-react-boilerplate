@@ -23,7 +23,6 @@ pipeline {
             steps {
                 slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})")
                 sh 'npm run build:dev'
-                sh 'npm run build:storybook'
             }
         }
         stage('Build Production') {
