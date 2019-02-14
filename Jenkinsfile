@@ -10,6 +10,7 @@ pipeline {
              returnStdout: true,
              script: "git describe --always"
         )}"""
+        DOCKER_REPO = "monetcap/uikit-react-boilerplate"
     }
 
     stages {
@@ -20,10 +21,18 @@ pipeline {
               	sh 'npm run build'
             }
         }
-		stage('docker build') {
+		stage('docker build & push') {
         	agent { docker { image 'docker:18.09.2' } }
             steps {
-              	script { docker.build('test') }
+              	script {
+              		def image = docker.build("${DOCKER_REPO}")
+
+              		docker.withRegistry('', "docker-registry-credentials") {
+              			image.push("latest")
+                        image.push("${GIT_BRANCH}")
+                        image.psuh("${COMMIT_HASH}")
+              		}
+              	}
             }
         }
     }
