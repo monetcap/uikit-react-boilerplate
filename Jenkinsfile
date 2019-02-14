@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:latest'
+            image 'node:10.15.1-alpine'
         }
     }
     environment {
@@ -31,6 +31,7 @@ pipeline {
             when { branch 'development' }
             steps {
                 sh 'npm run build:dev'
+                sh 'make build'
             }
         }
         stage('Build Production') {
