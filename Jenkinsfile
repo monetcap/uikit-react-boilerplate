@@ -23,5 +23,12 @@ pipeline {
               	sh 'npm run build'
             }
         }
+        stage('Build Docker Image') {
+        	steps {
+        		script {
+        			docker.build("monetcap/uikit-react-boilerplate"
+        		}
+        	}
+        }
     }
 }
