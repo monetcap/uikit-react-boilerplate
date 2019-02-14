@@ -3,19 +3,18 @@ pipeline {
 
     environment {
         COMMIT_MESSAGE = """${sh(
-          returnStdout: true,
-          script: "git --no-pager log --format='medium' -1 ${GIT_COMMIT}"
-          )}
-        """
+          	returnStdout: true,
+          	script: "git --no-pager log --format='medium' -1 ${GIT_COMMIT}"
+        )}"""
     }
 
     stages {
         stage('Notify Slack') {
-          steps {
-            slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
-          }
+			agent any
+			steps {
+				slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
+			}
         }
-
         stage('Build') {
         	agent {
         		docker {
@@ -23,8 +22,8 @@ pipeline {
         		}
         	}
             steps {
-              sh 'npm install'
-              sh 'npm build'
+              	sh 'npm install'
+              	sh 'npm build'
             }
         }
     }
