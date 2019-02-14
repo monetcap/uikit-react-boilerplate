@@ -1,5 +1,9 @@
 pipeline {
-    agent none
+    agent {
+    	docker {
+        	image 'docker:18.09.2'
+        }
+    }
 
     environment {
     	COMMIT_MESSAGE = """${sh(
@@ -22,11 +26,6 @@ pipeline {
             }
         }
 		stage('Build 2') {
-        	agent {
-        		docker {
-        			image 'docker:18.09.2'
-        		}
-        	}
             steps {
               	sh 'make build'
             }
