@@ -1,6 +1,13 @@
 pipeline {
     agent none
 
+    environment {
+    	COMMIT_MESSAGE = """${sh(
+        	returnStdout: true,
+           	script: "git --no-pager log --format='medium' -1 ${GIT_COMMIT}"
+        )}"""
+    }
+
     stages {
         stage('Build 1') {
         	agent {
