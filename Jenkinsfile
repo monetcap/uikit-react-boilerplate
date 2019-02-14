@@ -20,7 +20,7 @@ pipeline {
         		}
         	}
             steps {
-              	sh 'ls -al'
+              	sh 'make build'
             }
         }
     }
