@@ -20,7 +20,6 @@ pipeline {
         	agent {
         		docker {
         			image 'node:10.15.1'
-        			args '-v ./dist:dist'
         		}
         	}
             steps {
