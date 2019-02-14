@@ -30,7 +30,7 @@ pipeline {
               		docker.withRegistry('', "docker-registry-credentials") {
               			image.push("latest")
                         image.push("${GIT_BRANCH}")
-                        image.psuh("${COMMIT_HASH}")
+                        image.push("${COMMIT_HASH}")
               		}
               	}
             }
