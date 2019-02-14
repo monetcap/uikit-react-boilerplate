@@ -13,7 +13,7 @@ webpack.*.js
 
 
 Makefile
-Jenkinsfile
+Jenkinsfile.backup
 Dockerfile
 
 .gitignore
