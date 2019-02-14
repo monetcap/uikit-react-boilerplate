@@ -5,12 +5,12 @@ pipeline {
     	COMMIT_MESSAGE = """${sh(
         	returnStdout: true,
            	script: "git --no-pager log --format='medium' -1 ${GIT_COMMIT}"
-        )}
+        	)}
         """
 		COMMIT_HASH = """${sh(
         	returnStdout: true,
            	script: "git describe --always"
-        )}
+        	)}
         """
     }
 
