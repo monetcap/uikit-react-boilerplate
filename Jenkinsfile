@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'docker:18.09.2' } }
+    agent any
 
     environment {
     	COMMIT_MESSAGE = """${sh(
@@ -13,17 +13,12 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('npm build') {
         	agent { docker { image 'node:10.15.1' } }
             steps {
               	sh 'npm install'
               	sh 'npm run build'
             }
-        }
-        stage('Build Docker Image') {
-        	steps {
-        		sh 'docker ps'
-        	}
         }
     }
 }
