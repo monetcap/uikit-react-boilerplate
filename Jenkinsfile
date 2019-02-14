@@ -20,5 +20,11 @@ pipeline {
               	sh 'npm run build'
             }
         }
+		stage('docker build') {
+        	agent { docker { image 'docker:18.09.2' } }
+            steps {
+              	sh 'docker --version'
+            }
+        }
     }
 }
