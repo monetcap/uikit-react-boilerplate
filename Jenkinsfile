@@ -11,29 +11,48 @@ pipeline {
              script: "git describe --always"
         )}"""
         DOCKER_REPO = "monetcap/uikit-react-boilerplate"
+        DOCKER_CREDENTIALS = "docker-registry-credentials"
     }
 
     stages {
-        stage('npm build') {
+    	stage('Notify Slack') {
+        	steps {
+           		slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
+        	}
+        }
+
+        stage('npm install & build') {
         	agent { docker { image 'node:10.15.1' } }
             steps {
               	sh 'npm install'
               	sh 'npm run build'
             }
         }
+
 		stage('docker build & push') {
         	agent { docker { image 'docker:18.09.2' } }
             steps {
               	script {
               		def image = docker.build("${DOCKER_REPO}")
 
-              		docker.withRegistry('', "docker-registry-credentials") {
-              			image.push("latest")
+              		docker.withRegistry('', "${DOCKER_CREDENTIALS}") {
                         image.push("${GIT_BRANCH}")
                         image.push("${COMMIT_HASH}")
               		}
               	}
+
+              	slackSend (color: '0db7ed', message: "Docker Image Built & Pushed - https://hub.docker.com/r/monetcap/uikit-react-boilerplate")
             }
+        }
+    }
+
+    post {
+    	failure {
+        	slackSend (color: '#FF0000', message: "Build Failed! - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
+        }
+
+        success {
+        	slackSend (color: '#00FF00', message: "Success! - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
         }
     }
 }
