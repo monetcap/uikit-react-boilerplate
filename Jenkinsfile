@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-              sh 'npm install'
+              sh 'rm -rf node_modules && npm install'
             }
         }
         stage('Code Quality Check') {
