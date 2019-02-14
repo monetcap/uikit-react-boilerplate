@@ -24,6 +24,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
+        	agent { docker { image 'docker:18.09.2' } }
         	steps {
         		script {
         			docker.build("monetcap/uikit-react-boilerplate")
