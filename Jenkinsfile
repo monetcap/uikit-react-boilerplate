@@ -23,7 +23,7 @@ pipeline {
 		stage('docker build') {
         	agent { docker { image 'docker:18.09.2' } }
             steps {
-              	sh 'docker --version'
+              	script { docker.build('test') }
             }
         }
     }
