@@ -32,7 +32,9 @@ pipeline {
             steps {
                 sh 'npm run build:dev'
 
-                def dockerImage = docker.build("monetcap/uikit-react-boilerplate")
+				script {
+					def dockerImage = docker.build("monetcap/uikit-react-boilerplate")
+				}
             }
         }
         stage('Build Production') {
