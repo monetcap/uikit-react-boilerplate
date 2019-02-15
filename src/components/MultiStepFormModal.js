@@ -124,7 +124,7 @@ class MultiStepFormModal extends React.Component {
     UIkit.modal('#msf-modal').hide();
     UIkit.modal('#msf-submitting-modal').show();
 
-    axios.post('https://script.google.com/macros/s/AKfycbyvfXZluwDVsCEDL0JrE_zfvLHwLqgCxLTbmibp0CT5pWG36Hk/exec',
+    axios.post('https://script.google.com/a/vermilion.tech/macros/s/AKfycbwea5UMuk0KenY-RvrOB5GF40kCKPmIjwN-odukrA/exec',
       formData,
       {
         headers: {
