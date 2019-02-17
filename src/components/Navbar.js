@@ -65,8 +65,8 @@ const Navbar = (
           </div> */}
           <ul className="uk-nav uk-nav-primary uk-margin-top">
             <li><a href="#section-partners" data-uk-scroll>Partners</a></li>
-            <li><a href="#section-apply">Apply now</a></li>
-            <li><a href="#section-about">About us</a></li>
+            <li><a href="#section-apply" data-uk-scroll>Apply now</a></li>
+            <li><a href="#section-about" data-uk-scroll>About us</a></li>
             <li><a href="tel:1-800-377-5554">Contact us</a></li>
           </ul>
         </div>

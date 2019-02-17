@@ -51,7 +51,7 @@ export default class Hero extends React.Component {
         <div
           className="uk-flex uk-flex-middle uk-flex-center uk-flex-column uk-background-norepeat uk-background-cover uk-background-blend-overlay background-test"
           data-src={heroImage}
-          id= "section-apply"
+          id="section-apply"
           width="1920"
           height="1080"
           data-uk-img="data-uk-img"
