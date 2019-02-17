@@ -41,7 +41,7 @@ const App = (
       </div>
     </div>
 
-    <div className="uk-section uk-section-large">
+    <div id="section-about" className="uk-section uk-section-large">
       <div className="uk-container">
         <div className="uk-margin-large">
           <h1 className="uk-text-center uk-text-primary">About Us</h1>
