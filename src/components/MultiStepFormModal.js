@@ -365,9 +365,9 @@ class MultiStepFormModal extends React.Component {
                         </div>
 
                         <input
-                          className="uk-button uk-button-default"
+                          className="uk-button uk-button-primary"
                           type="submit"
-                          value="Get Cash Now"
+                          value="Get Funding Now"
                         />
                       </div>
                     </li>
