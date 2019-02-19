@@ -54,7 +54,9 @@ pipeline {
             when { branch 'development' }
             steps {
                 sshagent(credentials: ["${RUNNER_CREDENTIALS}"]) {
-                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker ps"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker stop monet-development"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker rm monet-development"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker pull ${DOCKER_REPO}:development"
                 }
             }
         }
