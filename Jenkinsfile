@@ -38,10 +38,11 @@ pipeline {
             agent { docker { image 'docker:18.09.2' } }
             steps {
                 script {
+                    def branchName = "${GIT_BRANCH}".replace('/', '_')
                     def image = docker.build("${DOCKER_REPO}")
 
                     docker.withRegistry('', "${DOCKER_CREDENTIALS}") {
-                        image.push("${GIT_BRANCH}")
+                        image.push(branchName)
                         image.push("${COMMIT_HASH}")
                     }
                 }
