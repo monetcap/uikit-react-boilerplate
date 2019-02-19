@@ -105,37 +105,49 @@ class PartnerSignupForm extends React.Component {
           <form onSubmit={this.handleSubmit} className="uk-grid-small uk-text-small uk-margin-top" data-uk-grid>
             <div className="uk-width-1-4@s">
               <label htmlFor="pf-first-name">
-                First Name
+                <span className="uk-hidden">
+                  First Name
+                </span>
                 <input id="pf-first-name" className="uk-input" type="text" name="firstName" onChange={this.handleChange} placeholder="First name" required />
               </label>
             </div>
             <div className="uk-width-1-4@s">
               <label htmlFor="pf-last-name">
-                Last Name
+                <span className="uk-hidden">
+                  Last Name
+                </span>
                 <input id="pf-last-name" className="uk-input" type="text" name="lastName" onChange={this.handleChange} placeholder="Last name" required />
               </label>
             </div>
             <div className="uk-width-1-2@s">
               <label htmlFor="pf-phone">
-                Phone
+                <span className="uk-hidden">
+                  Phone
+                </span>
                 <input id="pf-phone" className="uk-input" type="text" name="phone" onChange={this.handleChange} placeholder="Phone number" required />
               </label>
             </div>
             <div className="uk-width-1-2@s">
               <label htmlFor="pf-email">
-                Email
+                <span className="uk-hidden">
+                  Email
+                </span>
                 <input id="pf-email" className="uk-input" type="email" name="email" onChange={this.handleChange} placeholder="E-mail address" required />
               </label>
             </div>
             <div className="uk-width-1-2@s">
               <label htmlFor="pf-businessname">
-                Business Name
+                <span className="uk-hidden">
+                  Business Name
+                </span>
                 <input id="pf-businessname" className="uk-input" type="text" name="businessName" onChange={this.handleChange} placeholder="Business name" required />
               </label>
             </div>
             <div className="uk-width-1-1@s">
               <label htmlFor="pf-message">
-                Message
+                <span className="uk-hidden">
+                  Message
+                </span>
                 <textarea id="pf-message" className="uk-textarea" rows="4" name="message" onChange={this.handleChange} placeholder="Message" required />
               </label>
               <button type="submit" className="uk-button uk-button-alternate uk-text-center uk-align-center uk-width-1-2">Submit</button>
