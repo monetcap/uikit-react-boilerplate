@@ -1,72 +1,90 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:latest'
-        }
-    }
+    agent any
+
     environment {
-        CI = 'true'
+        COMMIT_MESSAGE = """${sh(
+            returnStdout: true,
+            script: "git --no-pager log --format='medium' -1 ${GIT_COMMIT}"
+        )}"""
+        COMMIT_HASH = """${sh(
+            returnStdout: true,
+            script: "git describe --always"
+        )}"""
+
+        DOCKER_REPO = "monetcap/uikit-react-boilerplate"
+        DOCKER_CREDENTIALS = "docker-registry-credentials"
+
+        RUNNER_USER = "runner"
+        RUNNER_HOST = "ragnarok.monetcap.com"
+        RUNNER_CREDENTIALS = "runner-credentials"
     }
+
     stages {
-        stage('Install Dependencies') {
+        stage('Notify Slack') {
             steps {
-              sh 'npm install'
+                slackSend(color: '#FFFF00', message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${env.COMMIT_MESSAGE}```")
             }
         }
-        stage('Code Quality Check') {
+
+        stage('npm install & build') {
+            agent { docker { image 'node:10.15.1' } }
             steps {
-              sh 'npm run lint'
-            }
-        }
-        stage('Build Staging') {
-            when { branch 'development' }
-            steps {
-                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})")
-                sh 'npm run build:dev'
-                sh 'npm run build:storybook'
-            }
-        }
-        stage('Build Production') {
-            when { branch 'master' }
-            steps {
-                slackSend (color: '#FFFF00', message: "Started: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n(${env.BUILD_URL})")
+                sh 'npm install'
                 sh 'npm run build'
             }
         }
-        stage('Test') {
+
+		    stage('docker build & push') {
+            agent { docker { image 'docker:18.09.2' } }
             steps {
-                sh 'npm test'
+                script {
+                    def image = docker.build("${DOCKER_REPO}")
+
+                    docker.withRegistry('', "${DOCKER_CREDENTIALS}") {
+                        image.push("${GIT_BRANCH}")
+                        image.push("${COMMIT_HASH}")
+                    }
+                }
+
+                slackSend (color: '#0db7ed', message: "Docker Image Built & Pushed - https://hub.docker.com/r/monetcap/uikit-react-boilerplate")
             }
         }
-        stage('Deploy Staging') {
+
+        stage('Deploy Development') {
             when { branch 'development' }
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: "47e214c3-29c0-49b5-bb72-77d143188c35", keyFileVariable: 'keyfile')]) {
-                    sh 'ssh -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} runner@ragnarok.monetcap.com "rm -rf /docker/staging-frontend.monetcap.com/dist"'
-                    sh 'scp -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} -r ./dist "runner@ragnarok.monetcap.com:/docker/staging-frontend.monetcap.com/dist"'
-
-                    slackSend (color: '#7851a9', message: "Deployed: staging-frontend.monetcap.com | staging-frontend.monetcap.com/storybook")
+                sshagent(credentials: ["${RUNNER_CREDENTIALS}"]) {
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker stop monet-development || true"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker rm monet-development || true"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker pull ${DOCKER_REPO}:development"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8090:80 --name monet-development monetcap/uikit-react-boilerplate:development"
                 }
+
+                slackSend (color: '#6101e3', message: "Development Deployed - https://monetcap.com")
             }
         }
-        stage('Deploy Production') {
+        stage('Deploy Master') {
             when { branch 'master' }
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: "89b383bf-8c04-4269-9df1-8a5ab97c579f", keyFileVariable: 'keyfile')]) {
-                    sh 'ssh -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} runner@ragnarok.monetcap.com "rm -rf /docker/prod-frontend.monetcap.com/dist"'
-                    sh 'scp -o StrictHostKeyChecking=No -o UserKnownHostsFile=/dev/null -i ${keyfile} -r ./dist "runner@ragnarok.monetcap.com:/docker/prod-frontend.monetcap.com/dist"'
-
-                    slackSend (color: '#7851a9', message: "Deployed: prod-frontend.monetcap.com")
+                sshagent(credentials: ["${RUNNER_CREDENTIALS}"]) {
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker stop monet-master || true"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker rm monet-master || true"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker pull ${DOCKER_REPO}:master"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8091:80 --name monet-master monetcap/uikit-react-boilerplate:master"
                 }
+
+                slackSend (color: '#6101e3', message: "Master Deployed - https://example.com")
             }
         }
     }
+
     post {
         failure {
-            slackSend (color: '#FF0000', message: "Failed! '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+            slackSend (color: '#FF0000', message: "Build Failed! - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
         }
+
         success {
-            slackSend (color: '#00FF00', message: "Success! '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+            slackSend (color: '#00FF00', message: "Success! - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
         }
     }
 }

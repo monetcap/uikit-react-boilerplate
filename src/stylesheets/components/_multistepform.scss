@@ -3,4 +3,22 @@
   @media (max-width: 640px) {
     flex-direction: column;
   }
+
+  li  {
+    a {
+      text-align: center;
+    }
+  }
+
+  input[type=radio] {
+    margin-right: .5em;
+  }
+
+  input[type=text] {
+    margin-bottom: .5em;
+  }
+
+  input[type=email] {
+    margin-bottom: .5em;
+  }
 }

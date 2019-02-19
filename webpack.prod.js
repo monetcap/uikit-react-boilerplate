@@ -21,7 +21,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Generic Title | ChangeMe',
+      title: 'Monet Capital | Expedited business capital within 24 hours',
       template: './src/index.html',
     }),
   ],

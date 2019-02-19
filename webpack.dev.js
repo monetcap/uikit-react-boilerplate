@@ -7,7 +7,7 @@ module.exports = merge(common, {
   mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Development',
+      title: 'Monet Capital | Expedited business capital within 24 hours',
       template: './src/index.html',
     }),
   ],

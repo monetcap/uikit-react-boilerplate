@@ -49,7 +49,7 @@ class PartnerSignupForm extends React.Component {
     UIkit.modal('#psf').hide();
     UIkit.modal('#psf-submitting-modal').show();
 
-    axios.post('https://script.google.com/macros/s/AKfycbyvfXZluwDVsCEDL0JrE_zfvLHwLqgCxLTbmibp0CT5pWG36Hk/exec',
+    axios.post('https://script.google.com/macros/s/AKfycbwpkD6jzIpC94heMVWK-hQeDUftyVQxO76R4j-JYdFniesY0xM/exec',
       formData,
       {
         headers: {

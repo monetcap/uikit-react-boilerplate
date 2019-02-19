@@ -1,6 +1,7 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 // const WebappWebpackPlugin = require('webapp-webpack-plugin');
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'MonetCap | Common Configuration',
       template: './src/index.html',
-    }), // ,
+    }),
     // new WebappWebpackPlugin('./src/images/add-logo-file.png')
   ],
   output: {
