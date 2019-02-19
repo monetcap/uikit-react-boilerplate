@@ -51,7 +51,7 @@ pipeline {
         }
 
         stage('Deploy Development') {
-            when { branch == 'development'}
+            when { branch 'development' }
             steps {
                 sshagent(credentials: ["${RUNNER_CREDENTIALS}"]) {
                     sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker ps"
