@@ -49,7 +49,7 @@ export default class Hero extends React.Component {
     return (
       <React.Fragment>
         <div
-          className="uk-flex uk-flex-middle uk-flex-center uk-flex-column uk-background-norepeat uk-background-cover uk-background-blend-overlay background-test"
+          className="uk-flex uk-flex-middle uk-flex-center uk-flex-column uk-background-norepeat uk-background-cover uk-background-blend-overlay background-test uk-position-relative"
           data-src={heroImage}
           id="section-apply"
           width="1920"
