@@ -46,7 +46,7 @@ pipeline {
                     }
                 }
 
-                slackSend (color: '0db7ed', message: "Docker Image Built & Pushed - https://hub.docker.com/r/monetcap/uikit-react-boilerplate")
+                slackSend (color: '#0db7ed', message: "Docker Image Built & Pushed - https://hub.docker.com/r/monetcap/uikit-react-boilerplate")
             }
         }
 
@@ -59,6 +59,8 @@ pipeline {
                     sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker pull ${DOCKER_REPO}:development"
                     sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8090:80 --name monet-development monetcap/uikit-react-boilerplate:development"
                 }
+
+                slackSend (color: '#6101e3', message: "Development Deployed - https://monetcap.com")
             }
         }
     }
