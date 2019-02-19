@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-134781234-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 import BackgroundImage1 from 'Images/teal-bg-image-1.png';
 import BackgroundImage2 from 'Images/teal-bg-image-2.png';
