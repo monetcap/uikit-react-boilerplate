@@ -223,7 +223,7 @@ class MultiStepFormModal extends React.Component {
                     </li>
                     <li>
                       <fieldset className="uk-fieldset">
-                        <legend className="uk-h2 uk-legend monet-text-gold">
+                        <legend className="uk-h2 uk-legend">
                           How soon do you need
                           {' '}
                           {moneySelect}
@@ -253,7 +253,7 @@ class MultiStepFormModal extends React.Component {
 
                     <li>
                       <fieldset className="uk-fieldset">
-                        <legend className="uk-h2 uk-legend monet-text-gold">
+                        <legend className="uk-h2 uk-legend">
                           How many years have you been in business?
                         </legend>
 
@@ -280,7 +280,7 @@ class MultiStepFormModal extends React.Component {
 
                     <li>
                       <fieldset className="uk-fieldset">
-                        <legend className="uk-h2 uk-legend monet-text-gold">
+                        <legend className="uk-h2 uk-legend">
                           What is your monthly revenue?
                         </legend>
 
