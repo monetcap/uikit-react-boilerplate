@@ -60,7 +60,7 @@ pipeline {
                     sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8090:80 --name monet-development monetcap/uikit-react-boilerplate:development"
                 }
 
-                slackSend (color: '#6101e3', message: "Development Deployed - https://monetcap.com")
+                slackSend (color: '#6101e3', message: "Development Deployed - https://staging-frontend.monetcap.com")
             }
         }
         stage('Deploy Master') {
@@ -73,7 +73,7 @@ pipeline {
                     sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8091:80 --name monet-master monetcap/uikit-react-boilerplate:master"
                 }
 
-                slackSend (color: '#6101e3', message: "Master Deployed - https://example.com")
+                slackSend (color: '#6101e3', message: "Master Deployed - https://monetcap.com")
             }
         }
     }
