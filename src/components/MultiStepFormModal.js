@@ -342,7 +342,11 @@ class MultiStepFormModal extends React.Component {
                             className="uk-form-label"
                             htmlFor="first-name"
                           >
-                            First Name
+                            <span
+                              className="uk-hidden"
+                            >
+                              First Name
+                            </span>
                             <input
                               id="first-name"
                               className="uk-input"
@@ -358,7 +362,11 @@ class MultiStepFormModal extends React.Component {
                             className="uk-form-label"
                             htmlFor="last-name"
                           >
-                            Last Name
+                            <span
+                              className="uk-hidden"
+                            >
+                              Last Name
+                            </span>
                             <input
                               id="last-name"
                               className="uk-input"
@@ -374,7 +382,11 @@ class MultiStepFormModal extends React.Component {
                             className="uk-form-label"
                             htmlFor="email-addr"
                           >
-                            Email
+                            <span
+                              className="uk-hidden"
+                            >
+                              E-mail
+                            </span>
                             <input
                               id="email-addr"
                               className="uk-input"
@@ -390,7 +402,11 @@ class MultiStepFormModal extends React.Component {
                             className="uk-form-label"
                             htmlFor="phone-num"
                           >
-                            Phone
+                            <span
+                              className="uk-hidden"
+                            >
+                              Phone Number
+                            </span>
                             <input
                               id="phone-num"
                               className="uk-input"
@@ -406,7 +422,11 @@ class MultiStepFormModal extends React.Component {
                             className="uk-form-label"
                             htmlFor="business-name"
                           >
+                          <span
+                            className="uk-hidden"
+                          >
                             Business Name
+                          </span>
                             <input
                               id="business-name"
                               className="uk-input"
