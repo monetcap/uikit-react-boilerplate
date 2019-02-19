@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
-                slackSend (color: '#c9393b', message: "Node Dependencies Installed & Distribution Built - ${env.JOB_NAME} ${env.BUILD_NUMBER}")
+                slackSend (color: '#c9393b', message: "Node Dependencies Installed & Distribution Built")
             }
         }
 
@@ -48,7 +48,7 @@ pipeline {
                     }
                 }
 
-                slackSend (color: '#0db7ed', message: "(<https://hub.docker.com/r/monetcap/uikit-react-boilerplate/tags|Docker Image Built & Pushed to DockerHub - ${env.JOB_NAME} ${env.BUILD_NUMBER}>)")
+                slackSend (color: '#0db7ed', message: "Docker Image Built & Pushed to DockerHub - https://hub.docker.com/r/monetcap/uikit-react-boilerplate/tags")
             }
         }
 
@@ -62,7 +62,7 @@ pipeline {
                     sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8090:80 --name monet-development monetcap/uikit-react-boilerplate:development"
                 }
 
-                slackSend (color: '#6101e3', message: "(<https://staging-frontend.monetcap.com|Development Deployed - ${env.JOB_NAME} ${env.BUILD_NUMBER}>)")
+                slackSend (color: '#6101e3', message: "Development Deployed - https://staging-frontend.monetcap.com")
             }
         }
         stage('Deploy Master') {
@@ -75,7 +75,7 @@ pipeline {
                     sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8091:80 --name monet-master monetcap/uikit-react-boilerplate:master"
                 }
 
-                slackSend (color: '#6101e3', message: "(<https://monetcap.com|Master Deployed - ${env.JOB_NAME} ${env.BUILD_NUMBER}>)")
+                slackSend (color: '#6101e3', message: "Master Deployed - https://monetcap.com")
             }
         }
     }
