@@ -63,6 +63,19 @@ pipeline {
                 slackSend (color: '#6101e3', message: "Development Deployed - https://monetcap.com")
             }
         }
+        stage('Deploy Master') {
+            when { branch 'master' }
+            steps {
+                sshagent(credentials: ["${RUNNER_CREDENTIALS}"]) {
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker stop monet-master || true"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker rm monet-master || true"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker pull ${DOCKER_REPO}:master"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${RUNNER_USER} ${RUNNER_HOST} docker run -d -p 127.0.0.1:8091:80 --name monet-master monetcap/uikit-react-boilerplate:master"
+                }
+
+                slackSend (color: '#6101e3', message: "Master Deployed - https://example.com")
+            }
+        }
     }
 
     post {
