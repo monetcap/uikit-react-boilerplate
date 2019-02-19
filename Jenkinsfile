@@ -48,7 +48,7 @@ pipeline {
                     }
                 }
 
-                slackSend (color: '#0db7ed', message: "Docker Image Built & Pushed to DockerHub - https://hub.docker.com/r/monetcap/uikit-react-boilerplate/tags\n`docker run --name some-monet -d -p 8080:80 ${DOCKER_REPO}:${COMMIT_HASH}`")
+                slackSend (color: '#0db7ed', message: "Docker Image Built & Pushed to DockerHub - https://hub.docker.com/r/monetcap/uikit-react-boilerplate/tags\n```\ndocker run --name some-monet -d -p 8080:80 ${DOCKER_REPO}:${COMMIT_HASH}```")
 
             }
         }
