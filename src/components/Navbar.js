@@ -59,10 +59,10 @@ const Navbar = (
 
       <div id="offcanvas-navbar" uk-offcanvas="flip:true; overlay: true">
         <div className="uk-offcanvas-bar uk-padding-remove-horizontal uk-flex uk-flex-column">
-          {/* <div className="uk-text-center">
+          <div className="uk-text-center">
             <a href="/" className="uk-logo uk-text-center"><img data-src={MonetcapLogo} alt="logo" width="160" data-uk-img /></a>
             <a className="uk-offcanvas-close" type="button"><i className="material-icons md-36 uk-text-primary">close</i></a>
-          </div> */}
+          </div>
           <ul className="uk-nav uk-nav-primary uk-margin-top">
             <li><a href="#section-partners" data-uk-scroll>Partners</a></li>
             <li><a href="#section-apply" data-uk-scroll>Apply now</a></li>

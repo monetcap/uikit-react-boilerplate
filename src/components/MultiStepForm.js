@@ -9,6 +9,8 @@ class MultiStepForm extends React.Component {
   constructor(props) {
     super(props);
 
+    this.modalName = '#msf-modal';
+
     this.state = {
       moneySelect: MoneySelect[0],
     };
@@ -23,8 +25,7 @@ class MultiStepForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    UIkit.modal('#msf-modal').show();
+    UIkit.modal(this.modalName).show();
   }
 
   render() {
@@ -40,20 +41,31 @@ class MultiStepForm extends React.Component {
             A select specifying the amount of money the user wishes to apply for.
             This select is generated from an array called `MoneySelect`.
           */}
-          <select
-            onChange={this.handleChange}
-            className="uk-select uk-width-expand"
+          <label
+            className="uk-width-expand"
+            htmlFor="money-select"
           >
-            {MoneySelect.map(item => (
-              <option>{item}</option>
-            ))}
-          </select>
+            <select
+              id="money-select"
+              onChange={this.handleChange}
+              className="uk-select"
+            >
+              {MoneySelect.map(item => (
+                <option value={item}>{item}</option>
+              ))}
+            </select>
+            <span
+              className="uk-hidden"
+            >
+              Select the amount of money you wish to apply for
+            </span>
+          </label>
 
           {/*
             An button which brings up the modal for the user to
             fill out the remainder of the `MultiStepForm`.
           */}
-          <button className="uk-button uk-button-primary uk-flex-">Apply Now</button>
+          <button type="submit" className="uk-button uk-button-primary uk-flex-">Apply Now</button>
 
           {/*
             Shown on `Apply Now` input submit button click. `moneySelect` state
