@@ -63,7 +63,7 @@ export default class IconGrid extends React.Component {
       <React.Fragment>
 
 
-        <div className="uk-child-width-1-2@s uk-child-width-1-4@m  uk-text-center uk-grid uk-margin-large">
+        <div className="uk-child-width-1-2 uk-child-width-1-4@m  uk-text-center uk-grid uk-margin-large">
 
           {
             icons.map(icon => <IconGridItem {...icon} />)

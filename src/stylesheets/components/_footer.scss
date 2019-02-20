@@ -4,13 +4,13 @@
     list-style-type: none;
     margin-bottom: 1em;
 
-    @media (min-width: $breakpoint-small) {
+    @media (min-width: $breakpoint-medium) {
       display: inline;
     }
   }
 
   li + li::before {
-    @media (min-width: $breakpoint-small) {
+    @media (min-width: $breakpoint-medium) {
       content: " | ";
       margin: 0 1em;
     }
