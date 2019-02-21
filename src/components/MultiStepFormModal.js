@@ -12,36 +12,40 @@ import {
 
 const LeftArrow = (
   <div className="uk-position-bottom-right uk-padding">
-    <a
-      href="#"
+    <span
       data-uk-switcher-item="previous"
       data-uk-icon="icon: chevron-left; ratio: 1.5"
-    />
+    >
+      <span className="uk-hidden">Previous</span>
+    </span>
   </div>
 );
 
 const RightArrow = (
   <div className="uk-position-bottom-right uk-padding">
-    <a
-      href="#"
+    <span
       data-uk-switcher-item="next"
       data-uk-icon="icon: chevron-right; ratio: 1.5"
-    />
+    >
+      <span className="uk-hidden">Next</span>
+    </span>
   </div>
 );
 
-const LeftRightArrows = (
+const LeftRightArrow = (
   <div className="uk-position-bottom-right uk-padding">
-    <a
-      href="#"
+    <span
       data-uk-switcher-item="previous"
       data-uk-icon="icon: chevron-left; ratio: 1.5"
-    />
-    <a
-      href="#"
+    >
+      <span className="uk-hidden">Previous</span>
+    </span>
+    <span
       data-uk-switcher-item="next"
       data-uk-icon="icon: chevron-right; ratio: 1.5"
-    />
+    >
+      <span className="uk-hidden">Next</span>
+    </span>
   </div>
 );
 
@@ -214,20 +218,23 @@ class MultiStepFormModal extends React.Component {
                           {moneySelect}
                         </h2>
                       </div>
+
+                      {RightArrow}
                     </li>
                     <li>
-                      <div>
-                        <h2 className="monet-text-gold">
+                      <fieldset className="uk-fieldset">
+                        <legend className="uk-h2 uk-legend">
                           How soon do you need
                           {' '}
                           {moneySelect}
                           ?
-                        </h2>
+                        </legend>
 
-                        {SoonSelect.map(item => (
+                        {SoonSelect.map((item, index) => (
                           <div className="uk-margin">
-                            <label>
+                            <label htmlFor={`soon-select-${index}`}>
                               <input
+                                id={`soon-select-${index}`}
                                 className="uk-radio"
                                 type="radio"
                                 name="soonSelect"
@@ -240,19 +247,21 @@ class MultiStepFormModal extends React.Component {
                             <br />
                           </div>
                         ))}
-                      </div>
+                      </fieldset>
+                      {RightArrow}
                     </li>
 
                     <li>
-                      <div>
-                        <h2 className="monet-text-gold">
+                      <fieldset className="uk-fieldset">
+                        <legend className="uk-h2 uk-legend">
                           How many years have you been in business?
-                        </h2>
+                        </legend>
 
-                        {YearSelect.map(item => (
+                        {YearSelect.map((item, index) => (
                           <div className="uk-margin">
-                            <label>
+                            <label htmlFor={`year-select-${index}`}>
                               <input
+                                id={`year-select-${index}`}
                                 className="uk-radio"
                                 type="radio"
                                 name="yearSelect"
@@ -265,19 +274,21 @@ class MultiStepFormModal extends React.Component {
                             <br />
                           </div>
                         ))}
-                      </div>
+                      </fieldset>
+                      {LeftRightArrow}
                     </li>
 
                     <li>
-                      <div>
-                        <h2 className="monet-text-gold">
+                      <fieldset className="uk-fieldset">
+                        <legend className="uk-h2 uk-legend">
                           What is your monthly revenue?
-                        </h2>
+                        </legend>
 
-                        {RevenueSelect.map(item => (
+                        {RevenueSelect.map((item, index) => (
                           <div className="uk-margin">
-                            <label>
+                            <label htmlFor={`revenue-select-${index}`}>
                               <input
+                                id={`revenue-select-${index}`}
                                 className="uk-radio"
                                 type="radio"
                                 name="revenueSelect"
@@ -290,7 +301,8 @@ class MultiStepFormModal extends React.Component {
                             <br />
                           </div>
                         ))}
-                      </div>
+                      </fieldset>
+                      {LeftRightArrow}
                     </li>
 
                     <li>
@@ -300,19 +312,23 @@ class MultiStepFormModal extends React.Component {
                         </h2>
 
                         <div className="uk-margin">
-                          <label>Choose Industry</label>
-                          <select
-                            name="industrySelect"
-                            onChange={this.handleChange}
-                            className="uk-select"
-                          >
-                            {IndustrySelect.map(item => (
-                              <option>{item}</option>
-                            ))}
-                          </select>
+                          <label htmlFor="industry-select">
+                            Choose Industry
+                            <select
+                              id="industry-select"
+                              name="industrySelect"
+                              onChange={this.handleChange}
+                              className="uk-select"
+                            >
+                              {IndustrySelect.map(item => (
+                                <option>{item}</option>
+                              ))}
+                            </select>
+                          </label>
                           <br />
                         </div>
                       </div>
+                      {LeftRightArrow}
                     </li>
 
                     <li>
@@ -322,57 +338,126 @@ class MultiStepFormModal extends React.Component {
                         </h2>
 
                         <div className="uk-margin">
-                          <input
-                            className="uk-input"
-                            type="text"
-                            name="firstName"
-                            onChange={this.handleChange}
-                            placeholder="First Name"
-                            required
-                          />
-                          <input
-                            className="uk-input"
-                            type="text"
-                            name="lastName"
-                            onChange={this.handleChange}
-                            placeholder="Last Name"
-                            required
-                          />
-                          <input
-                            className="uk-input"
-                            type="email"
-                            name="email"
-                            onChange={this.handleChange}
-                            placeholder="Email Address"
-                            required
-                          />
-                          <input
-                            className="uk-input"
-                            type="text"
-                            name="phone"
-                            onChange={this.handleChange}
-                            placeholder="Phone Number"
-                            required
-                          />
-                          <input
-                            className="uk-input"
-                            type="text"
-                            name="businessName"
-                            onChange={this.handleChange}
-                            placeholder="Business Name"
-                            required
-                          />
+                          <label
+                            className="uk-form-label"
+                            htmlFor="first-name"
+                          >
+                            <span
+                              className="uk-hidden"
+                            >
+                              First Name
+                            </span>
+                            <input
+                              id="first-name"
+                              className="uk-input"
+                              type="text"
+                              name="firstName"
+                              onChange={this.handleChange}
+                              placeholder="First Name"
+                              required
+                            />
+                          </label>
+
+                          <label
+                            className="uk-form-label"
+                            htmlFor="last-name"
+                          >
+                            <span
+                              className="uk-hidden"
+                            >
+                              Last Name
+                            </span>
+                            <input
+                              id="last-name"
+                              className="uk-input"
+                              type="text"
+                              name="lastName"
+                              onChange={this.handleChange}
+                              placeholder="Last Name"
+                              required
+                            />
+                          </label>
+
+                          <label
+                            className="uk-form-label"
+                            htmlFor="email-addr"
+                          >
+                            <span
+                              className="uk-hidden"
+                            >
+                              E-mail
+                            </span>
+                            <input
+                              id="email-addr"
+                              className="uk-input"
+                              type="email"
+                              name="email"
+                              onChange={this.handleChange}
+                              placeholder="Email Address"
+                              required
+                            />
+                          </label>
+
+                          <label
+                            className="uk-form-label"
+                            htmlFor="phone-num"
+                          >
+                            <span
+                              className="uk-hidden"
+                            >
+                              Phone Number
+                            </span>
+                            <input
+                              id="phone-num"
+                              className="uk-input"
+                              type="text"
+                              name="phone"
+                              onChange={this.handleChange}
+                              placeholder="Phone Number"
+                              required
+                            />
+                          </label>
+
+                          <label
+                            className="uk-form-label"
+                            htmlFor="business-name"
+                          >
+                          <span
+                            className="uk-hidden"
+                          >
+                            Business Name
+                          </span>
+                            <input
+                              id="business-name"
+                              className="uk-input"
+                              type="text"
+                              name="businessName"
+                              onChange={this.handleChange}
+                              placeholder="Business Name"
+                              required
+                            />
+                          </label>
+
                         </div>
 
-                        <input
+                        <button
                           className="uk-button uk-button-primary"
                           type="submit"
-                          value="Get Funding Now"
-                        />
+                        >
+                          Get Funding Now
+                        </button>
                       </div>
+                      {LeftArrow}
                     </li>
                   </ul>
-                  <input style={{ display: 'none' }} onChange={this.handleChange} id="honeypot" type="text" name="honeypot" value="" />
+                  <label
+                    className="uk-hidden"
+                    htmlFor="honeypot"
+                  >
+                    Honeypot
+                    <input onChange={this.handleChange} id="honeypot" type="text" name="honeypot" value="" />
+                  </label>
+
                 </form>
               </div>
             </div>

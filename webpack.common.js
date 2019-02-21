@@ -1,6 +1,7 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 // const WebappWebpackPlugin = require('webapp-webpack-plugin');
 
@@ -17,6 +18,7 @@ module.exports = {
     app: './src/index.js',
   },
   plugins: [
+    new FaviconsWebpackPlugin('./src/images/favicon.png'),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'MonetCap | Common Configuration',

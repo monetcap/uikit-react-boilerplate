@@ -31,6 +31,7 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
+                slackSend (color: '#c9393b', message: "Node Dependencies Installed & Distribution Built")
             }
         }
 
@@ -38,15 +39,17 @@ pipeline {
             agent { docker { image 'docker:18.09.2' } }
             steps {
                 script {
+                    def branchName = "${GIT_BRANCH}".replace('/', '_')
                     def image = docker.build("${DOCKER_REPO}")
 
                     docker.withRegistry('', "${DOCKER_CREDENTIALS}") {
-                        image.push("${GIT_BRANCH}")
+                        image.push(branchName)
                         image.push("${COMMIT_HASH}")
                     }
                 }
 
-                slackSend (color: '#0db7ed', message: "Docker Image Built & Pushed - https://hub.docker.com/r/monetcap/uikit-react-boilerplate")
+                slackSend (color: '#0db7ed', message: "Docker Image Built & Pushed to DockerHub - https://hub.docker.com/r/monetcap/uikit-react-boilerplate/tags\n```\nTry it out:\n\ndocker run --rm -p 8080:80 ${DOCKER_REPO}:${COMMIT_HASH}```")
+
             }
         }
 

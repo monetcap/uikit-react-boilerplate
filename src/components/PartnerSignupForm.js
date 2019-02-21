@@ -98,27 +98,59 @@ class PartnerSignupForm extends React.Component {
           </div>
         </div>
         <div className="uk-background-primary uk-padding-large uk-text-center">
-          <button className="uk-modal-close-default" type="button" data-uk-close />
+          <button className="uk-modal-close-default" type="button" data-uk-close>
+            <span className="uk-hidden">Close</span>
+          </button>
           <span className="uk-text-uppercase uk-text-large uk-light uk-margin-bottom">Make more with monet</span>
           <form onSubmit={this.handleSubmit} className="uk-grid-small uk-text-small uk-margin-top" data-uk-grid>
             <div className="uk-width-1-4@s">
-              <input className="uk-input" type="text" name="firstName" onChange={this.handleChange} placeholder="First name" required />
+              <label htmlFor="pf-first-name">
+                <span className="uk-hidden">
+                  First Name
+                </span>
+                <input id="pf-first-name" className="uk-input" type="text" name="firstName" onChange={this.handleChange} placeholder="First name" required />
+              </label>
             </div>
             <div className="uk-width-1-4@s">
-              <input className="uk-input" type="text" name="lastName" onChange={this.handleChange} placeholder="Last name" required />
+              <label htmlFor="pf-last-name">
+                <span className="uk-hidden">
+                  Last Name
+                </span>
+                <input id="pf-last-name" className="uk-input" type="text" name="lastName" onChange={this.handleChange} placeholder="Last name" required />
+              </label>
             </div>
             <div className="uk-width-1-2@s">
-              <input className="uk-input" type="text" name="phone" onChange={this.handleChange} placeholder="Phone number" required />
+              <label htmlFor="pf-phone">
+                <span className="uk-hidden">
+                  Phone
+                </span>
+                <input id="pf-phone" className="uk-input" type="text" name="phone" onChange={this.handleChange} placeholder="Phone number" required />
+              </label>
             </div>
             <div className="uk-width-1-2@s">
-              <input className="uk-input" type="email" name="email" onChange={this.handleChange} placeholder="E-mail address" required />
+              <label htmlFor="pf-email">
+                <span className="uk-hidden">
+                  Email
+                </span>
+                <input id="pf-email" className="uk-input" type="email" name="email" onChange={this.handleChange} placeholder="E-mail address" required />
+              </label>
             </div>
             <div className="uk-width-1-2@s">
-              <input className="uk-input" type="text" name="businessName" onChange={this.handleChange} placeholder="Business name" required />
+              <label htmlFor="pf-businessname">
+                <span className="uk-hidden">
+                  Business Name
+                </span>
+                <input id="pf-businessname" className="uk-input" type="text" name="businessName" onChange={this.handleChange} placeholder="Business name" required />
+              </label>
             </div>
             <div className="uk-width-1-1@s">
-              <textarea className="uk-textarea" rows="4" name="message" onChange={this.handleChange} placeholder="Message" required />
-              <button className="uk-button uk-button-alternate uk-text-center uk-align-center uk-width-1-2">Submit</button>
+              <label htmlFor="pf-message">
+                <span className="uk-hidden">
+                  Message
+                </span>
+                <textarea id="pf-message" className="uk-textarea" rows="4" name="message" onChange={this.handleChange} placeholder="Message" required />
+              </label>
+              <button type="submit" className="uk-button uk-button-alternate uk-text-center uk-align-center uk-width-1-2">Submit</button>
             </div>
             <input style={{ display: 'none' }} onChange={this.handleChange} id="honeypot" type="text" name="honeypot" value="" />
           </form>
